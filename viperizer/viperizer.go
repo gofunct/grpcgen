@@ -128,7 +128,7 @@ func (v *Viperizer) InitializeProject() {
 			er(err)
 		}
 	} else if !isEmpty(v.Project.GetAbsPath()) { // If path exists and is not empty don't use it
-		er("Cobra will not create a new project in a non empty directory: " + v.Project.GetAbsPath())
+		er("Gen will not create a new project in a non empty directory: " + v.Project.GetAbsPath())
 	}
 
 	// We have a directory and it's empty. Time to initialize it.

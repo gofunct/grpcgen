@@ -10,7 +10,8 @@ import (
 
 var (
 	cfg     *viperizer.Viperizer
-	service string
+	service, packageName, parentName string
+
 )
 
 func init() {

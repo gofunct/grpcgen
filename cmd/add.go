@@ -10,12 +10,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
+
+
 func init() {
 	addCmd.Flags().StringVarP(&packageName, "package", "t", "", "target package name (e.g. github.com/spf13/hugo)")
 	addCmd.Flags().StringVarP(&parentName, "parent", "p", "rootCmd", "variable name of parent command for this command")
 }
 
-var packageName, parentName string
 
 var addCmd = &cobra.Command{
 	Use:     "add [command name]",
