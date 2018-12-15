@@ -14,8 +14,6 @@ github.com/go-pg/pg/internal/pool
 github.com/go-pg/pg/orm
 github.com/go-pg/pg/types
 github.com/go-pg/pg/internal/parser
-# github.com/gofunct/viperize v0.0.0-20181214232507-0f36f594d25f
-github.com/gofunct/viperize
 # github.com/gogo/protobuf v1.2.0
 github.com/gogo/protobuf/types
 github.com/gogo/protobuf/proto
@@ -82,7 +80,7 @@ github.com/spf13/viper
 # golang.org/x/crypto v0.0.0-20181203042331-505ab145d0a9
 golang.org/x/crypto/pbkdf2
 golang.org/x/crypto/ssh/terminal
-# golang.org/x/net v0.0.0-20181207154023-610586996380
+# golang.org/x/net v0.0.0-20180826012351-8a410e7b638d
 golang.org/x/net/context
 golang.org/x/net/trace
 golang.org/x/net/internal/timeseries

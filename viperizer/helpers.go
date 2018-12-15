@@ -1,4 +1,4 @@
-package cmd
+package viperizer
 
 import (
 	"bytes"
@@ -75,7 +75,7 @@ func isEmpty(path string) bool {
 	}
 
 	for _, name := range names {
-		if len(name) > 0 && name[0] != '.' {
+		if len(name) > 0 && name[0] != '.' && strings.Contains(name, ".yaml") != true {
 			return false
 		}
 	}
@@ -108,13 +108,13 @@ func executeTemplate(tmplStr string, data interface{}) (string, error) {
 	return buf.String(), err
 }
 
-func writeStringToFile(path string, s string) error {
-	return writeToFile(path, strings.NewReader(s))
+func WriteStringToFile(path string, s string) error {
+	return WriteToFile(path, strings.NewReader(s))
 }
 
 // writeToFile writes r to file with path only
 // if file/directory on given path doesn't exist.
-func writeToFile(path string, r io.Reader) error {
+func WriteToFile(path string, r io.Reader) error {
 	if exists(path) {
 		return fmt.Errorf("%v already exists", path)
 	}

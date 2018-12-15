@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/gofunct/gen/viperizer"
 	"os"
 	"path/filepath"
 	"unicode"
@@ -19,35 +20,33 @@ var packageName, parentName string
 var addCmd = &cobra.Command{
 	Use:     "add [command name]",
 	Aliases: []string{"command"},
-	Short:   "Add a command to a Cobra Application",
-	Long: `Add (cobra add) will create a new command, with a license and
-the appropriate structure for a Cobra-based CLI application,
+	Short:   "Add a command to a Gen Application",
+	Long: `Add (gen add) will create a new command, with the appropriate structure for a gen-based CLI application,
 and register it to its parent (default rootCmd).
 
 If you want your command to be public, pass in the command name
 with an initial uppercase letter.
 
-Example: cobra add server -> resulting in a new cmd/server.go`,
+Example: gen add server -> resulting in a new cmd/server.go`,
 
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) < 1 {
 			er("add needs a name for the command")
 		}
 
-		var project *Project
 		if packageName != "" {
-			project = NewProject(packageName)
+			cfg.Project = viperizer.NewProject(packageName)
 		} else {
 			wd, err := os.Getwd()
 			if err != nil {
 				er(err)
 			}
-			project = NewProjectFromPath(wd)
+			cfg.Project = viperizer.NewProjectFromPath(wd)
 		}
 
 		cmdName := validateCmdName(args[0])
-		cmdPath := filepath.Join(project.CmdPath(), cmdName+".go")
-		createCmdFile(cmdPath, cmdName)
+		cmdPath := filepath.Join(cfg.Project.GetCmd(), cmdName+".go")
+		viperizer.CreateCmdFile(cmdPath, cmdName, parentName)
 
 		fmt.Fprintln(cmd.OutOrStdout(), cmdName, "created at", cmdPath)
 	},
@@ -104,61 +103,4 @@ func validateCmdName(source string) string {
 		return source // source is initially valid name.
 	}
 	return output
-}
-
-func createCmdFile(path, cmdName string) {
-	template := `{{comment .copyright}}
-{{if .license}}{{comment .license}}{{end}}
-
-package {{.cmdPackage}}
-
-import (
-	"fmt"
-
-	"github.com/spf13/cobra"
-)
-
-// {{.cmdName}}Cmd represents the {{.cmdName}} command
-var {{.cmdName}}Cmd = &cobra.Command{
-	Use:   "{{.cmdName}}",
-	Short: "A brief description of your command",
-	Long: ` + "`" + `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.` + "`" + `,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("{{.cmdName}} called")
-	},
-}
-
-func init() {
-	{{.parentName}}.AddCommand({{.cmdName}}Cmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// {{.cmdName}}Cmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// {{.cmdName}}Cmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-}
-`
-
-	data := make(map[string]interface{})
-	data["cmdPackage"] = filepath.Base(filepath.Dir(path)) // last dir of path
-	data["parentName"] = parentName
-	data["cmdName"] = cmdName
-
-	cmdScript, err := executeTemplate(template, data)
-	if err != nil {
-		er(err)
-	}
-	err = writeStringToFile(path, cmdScript)
-	if err != nil {
-		er(err)
-	}
 }
