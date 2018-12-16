@@ -5,10 +5,10 @@ import (
 	"github.com/gofunct/grpcgen/errors"
 	"github.com/gofunct/grpcgen/example/todo"
 	"github.com/gofunct/grpcgen/proxy"
-	"github.com/gofunct/grpcgen/viperizer"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
+var proxyViper = viper.New()
 
 // gatewayCmd represents the gateway command
 var gatewayCmd = &cobra.Command{
@@ -23,10 +23,8 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-		prox := proxy.NewProxy(ctx)
-		_, err := viperizer.NewProxyViperizer("todo_gateway")
-		errors.IfErr("failed to create proxy viperizer", err)
-		err = todo.RegisterTodoServiceHandlerFromEndpoint(ctx, prox.Gateway, viper.GetString("proxy.backend"), prox.DialOpts)
+		prox := proxy.NewProxy(proxyViper, "todo_gateway")
+		err := todo.RegisterTodoServiceHandlerFromEndpoint(ctx, prox.Gateway, viper.GetString("proxy.backend"), prox.DialOpts)
 		errors.IfErr("failed to register gateway", err)
 		prox.Listen(ctx)
 	},
@@ -35,3 +33,4 @@ to quickly create a Cobra application.`,
 func init() {
 	RootCmd.AddCommand(gatewayCmd)
 }
+

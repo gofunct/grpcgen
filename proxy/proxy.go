@@ -1,7 +1,7 @@
 package proxy
 
 import (
-	"fmt"
+	"github.com/gofunct/grpcgen/errors"
 	"github.com/prometheus/common/log"
 	"net/http"
 	"os"
@@ -21,10 +21,12 @@ type Proxy struct {
 	Gateway   *runtime.ServeMux
 	Formatter handlers.LogFormatter
 	DialOpts  []grpc.DialOption
+	Config 		*viper.Viper
 }
 
-func NewProxy(ctx context.Context) *Proxy {
-
+func NewProxy(vi *viper.Viper, service string) *Proxy {
+	err := NewProxyViperizer(vi, service)
+	errors.IfErr("failed to creage proxy config", err)
 	formatter := LogHandlers()
 	mux := NewMux()
 
@@ -34,15 +36,18 @@ func NewProxy(ctx context.Context) *Proxy {
 	)
 	mux.Handle("/", handlers.CustomLoggingHandler(os.Stdout, gwmux, formatter))
 	log.Info("gateway handler registered-->", "/")
-	logrus.Infof("Proxying requests to gRPC service at '%s'", viper.GetString("proxy.backend"))
+	logrus.Infof("Proxying requests to gRPC service at '%s'", vi.GetString("proxy.backend"))
 
 	opts := NewDialOpts()
+
+
 
 	return &Proxy{
 		Mux:       mux,
 		Gateway:   gwmux,
 		Formatter: formatter,
 		DialOpts:  opts,
+		Config:    vi,
 	}
 }
 
@@ -65,8 +70,8 @@ func (p *Proxy) Shutdown(runner, stopper func()) {
 
 func (p *Proxy) Listen(ctx context.Context) {
 
-	addr := fmt.Sprintf(":%v", viper.GetInt("proxy.port"))
-	server := &http.Server{Addr: addr, Handler: p.Mux}
+
+	server := &http.Server{Addr: ":8080", Handler: p.Mux}
 
 	p.Shutdown(
 		func() {
@@ -80,3 +85,5 @@ func (p *Proxy) Listen(ctx context.Context) {
 			server.Shutdown(shutdown)
 		})
 }
+
+

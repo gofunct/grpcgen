@@ -6,13 +6,10 @@ import (
 	"os"
 )
 
-var (
-)
-
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:   "grpcgen",
-	Short: "grpcge  is a highly configurable grpc server- config.yaml holds all of the config options available for your server",
+	Short: "grpcgen  is a highly configurable grpc server- config.yaml holds all of the config options available for your server",
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

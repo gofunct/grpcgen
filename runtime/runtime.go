@@ -3,6 +3,7 @@ package runtime
 import (
 	"context"
 	"github.com/go-pg/pg"
+	"github.com/gofunct/grpcgen/errors"
 	"github.com/gofunct/grpcgen/store"
 	"github.com/gofunct/grpcgen/trace"
 	"github.com/prometheus/common/log"
@@ -24,12 +25,12 @@ type Runtime struct {
 	Debug    *http.Server
 	Store    *pg.DB
 	Listener net.Listener
-	LogLevel string
 	// Whether to log request header
 	Closer io.Closer
+	Config 		*viper.Viper
 }
 
-func NewRuntime() (*Runtime, error) {
+func NewRuntime(vi *viper.Viper, service string) (*Runtime, error) {
 	var err error
 	closer, err := trace.NewTracer("grpc_server")
 	if err != nil {
@@ -37,6 +38,9 @@ func NewRuntime() (*Runtime, error) {
 	}
 	router := NewMux()
 	listener, err := NewInsecureListener("grpc_port")
+	err = NewGrpcServerViperizer(vi, service)
+	errors.IfErr("failed to create server config", err)
+
 	return &Runtime{
 		Server: NewGrpc(),
 		Router: router,
@@ -46,6 +50,7 @@ func NewRuntime() (*Runtime, error) {
 		Store:    store.NewStore(),
 		Listener: listener,
 		Closer:   closer,
+		Config:   vi,
 	}, err
 }
 

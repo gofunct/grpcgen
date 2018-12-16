@@ -13,10 +13,10 @@ import (
 
 func NewMux() *http.ServeMux {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/swagger.json", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, viper.GetString("proxy.swagger_file"))
-	})
-	log.Info("swagger handler registered-->", "/swagger.json")
+	// mux.HandleFunc("/swagger.json", func(w http.ResponseWriter, r *http.Request) {
+	// 	http.ServeFile(w, r, viper.GetString("proxy.swagger_file"))
+	// })
+	// log.Info("swagger handler registered-->", "/swagger.json")
 	check := healthcheck.NewMetricsHandler(prometheus.DefaultRegisterer, "proxy")
 	check.AddLivenessCheck("goroutine_threshold", healthcheck.GoroutineCountCheck(viper.GetInt("proxy.routine_threshold")))
 	mux.HandleFunc("/live", check.LiveEndpoint)
