@@ -7,24 +7,27 @@ import (
 	"strings"
 )
 
+const (
+	proxyFile = "proxy.yaml"
+	serverFile = "grpcserver.yaml"
+)
+
 type Viperizer struct {
-	Project *Project
-	Config  *viper.Viper
+	Service string
+	Config 	*viper.Viper
 }
 
-// SetupViper returns a viper configuration object
-func NewViperizer(service string) (*Viperizer, error) {
-	viper.SetConfigName("viperize") // name of config file (without extension)
-	viper.Set("service", service)
+func NewGrpcServerViperizer(service string) (*Viperizer, error) {
+	viper.SetConfigName("grpc_server") // name of config file (without extension)
 	viper.AddConfigPath(os.Getenv("$HOME")) // name of config file (without extension)
 	viper.AddConfigPath(".")                // optionally look for config in the working directory
 	viper.AutomaticEnv()
-	viper.SetEnvPrefix(service)
+	viper.SetEnvPrefix(service+"_SERVER")
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 	// If a config file is found, read it in."A generator for gRPC based Applications"
 	if err := viper.ReadInConfig(); err != nil {
-		log.Info("failed to read config file, writing defaults to --> viperize.yaml")
-		if err := viper.WriteConfigAs("viperize.yaml"); err != nil {
+		log.Info("failed to read config file, writing defaults to -->"+serverFile)
+		if err := viper.WriteConfigAs(serverFile); err != nil {
 			return nil, err
 		}
 
@@ -34,10 +37,47 @@ func NewViperizer(service string) (*Viperizer, error) {
 			return nil, err
 		}
 	}
+	vi := &Viperizer{
+		Service: service,
+		Config:  nil,
+	}
+	vi.SetGrpcServerDefaults()
+	return vi, nil
+}
 
-	return &Viperizer{
-		Config: viper.GetViper(),
-	}, nil
+func NewProxyViperizer(service string) (*Viperizer, error) {
+	viper.SetConfigName("proxy") // name of config file (without extension)
+	viper.AddConfigPath(os.Getenv("$HOME")) // name of config file (without extension)
+	viper.AddConfigPath(".")                // optionally look for config in the working directory
+	viper.AutomaticEnv()
+	viper.SetEnvPrefix(service+"_PROXY")
+	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
+	// If a config file is found, read it in."A generator for gRPC based Applications"
+	if err := viper.ReadInConfig(); err != nil {
+		log.Info("failed to read config file, writing defaults to -->"+proxyFile)
+		if err := viper.WriteConfigAs(proxyFile); err != nil {
+			return nil, err
+		}
+
+	} else {
+		log.Info("Using config file-->", viper.ConfigFileUsed())
+		if err := viper.WriteConfig(); err != nil {
+			return nil, err
+		}
+	}
+	vi := &Viperizer{
+		Service: service,
+	}
+	vi.SetProxyDefaults()
+	return vi, nil
+}
+
+func (v *Viperizer) GetService() string {
+	return v.Service
+}
+
+func (v *Viperizer) GetViper() *viper.Viper {
+	return v.Config
 }
 
 func (v *Viperizer) SetGrpcServerDefaults() error {
@@ -54,8 +94,8 @@ func (v *Viperizer) SetGrpcServerDefaults() error {
 	v.Config.SetDefault("server.port", ":8443")
 	v.Config.SetDefault("server.routine_threshold", 300)
 	v.Config.SetDefault("server.jaeger_metrics", true)
-	log.Info("updating grpc server defaults--> viperize.yaml")
-	if err := v.WriteConfig(); err != nil {
+	log.Info("updating grpc server defaults-->"+serverFile)
+	if err := v.WriteConfig(serverFile); err != nil {
 		return err
 	}
 	return nil
@@ -84,24 +124,24 @@ func (v *Viperizer) SetProxyDefaults() error {
 	v.Config.SetDefault("proxy.allow_methods", true)
 	v.Config.SetDefault("proxy.allow_headers", true)
 
-	log.Info("updating proxy defaults--> viperize.yaml")
-	if err := v.WriteConfig(); err != nil {
+	log.Info("updating proxy defaults-->"+proxyFile)
+	if err := v.WriteConfig(proxyFile); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (v *Viperizer) ReadConfig() error {
+func (v *Viperizer) ReadConfig(file string) error {
 	// If a config file is found, read it in."A generator for gRPC based Applications"
 	if err := v.Config.ReadInConfig(); err != nil {
-		log.Info("failed to read config file, writing defaults to --> viperize.yaml")
-		if err = v.WriteConfig(); err != nil {
+		log.Info("failed to read config file, writing defaults to -->"+file)
+		if err = v.WriteConfig(file); err != nil {
 			return err
 		}
 		return err
 	} else {
 		log.Info("Using config file-->", v.Config.ConfigFileUsed())
-		if err = v.WriteConfig(); err != nil {
+		if err = v.WriteConfig(file); err != nil {
 			return err
 		}
 		return nil
@@ -109,29 +149,14 @@ func (v *Viperizer) ReadConfig() error {
 	return nil
 }
 
-func (v *Viperizer) WriteConfig() error {
-	if err := v.Config.WriteConfigAs("viperize.yaml"); err != nil {
+func (v *Viperizer) WriteConfig(file string) error {
+	if err := v.Config.WriteConfigAs(file); err != nil {
 		return err
 	} else {
-		log.Info("config file created-->", v.Config.ConfigFileUsed())
+		log.Info("grpc config file created-->", v.Config.ConfigFileUsed())
 		if err := v.Config.WriteConfig(); err != nil {
 			return err
 		}
 	}
 	return nil
-}
-
-func (v *Viperizer) InitializeProject() {
-	if !exists(v.Project.GetAbsPath()) { // If path doesn't yet exist, create it
-		err := os.MkdirAll(v.Project.GetAbsPath(), os.ModePerm)
-		if err != nil {
-			er(err)
-		}
-	} else if !isEmpty(v.Project.GetAbsPath()) { // If path exists and is not empty don't use it
-		er("Gen will not create a new project in a non empty directory: " + v.Project.GetAbsPath())
-	}
-
-	// We have a directory and it's empty. Time to initialize it.
-	v.CreateMainFile()
-	v.CreateRootCmdFile()
 }

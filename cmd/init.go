@@ -2,10 +2,9 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/gofunct/gen/viperizer"
+	"github.com/gofunct/grpcgen/errors"
+	"github.com/gofunct/grpcgen/project"
 	"os"
-	"path/filepath"
-
 	"github.com/spf13/cobra"
 )
 
@@ -17,31 +16,18 @@ var initCmd = &cobra.Command{
 with the appropriate structure for a gen-based CLI application.`,
 
 	Run: func(cmd *cobra.Command, args []string) {
+		var p *project.Project
 		wd, err := os.Getwd()
-		if err != nil {
-			er(err)
-		}
+		errors.IfErr("failed to get working directory", err)
 
 		if len(args) == 0 {
-			cfg.Project = viperizer.NewProjectFromPath(wd)
-		} else if len(args) == 1 {
-			arg := args[0]
-			if arg[0] == '.' {
-				arg = filepath.Join(wd, arg)
-			}
-			if filepath.IsAbs(arg) {
-				cfg.Project = viperizer.NewProjectFromPath(arg)
-			} else {
-				cfg.Project = viperizer.NewProject(arg)
-			}
-		} else {
-			er("please provide only one argument")
+			p = project.NewProjectFromPath(wd)
 		}
 
-		cfg.InitializeProject()
+		project.InitializeProject(p)
 
 		fmt.Fprintln(cmd.OutOrStdout(), `Your gen application is ready at
-`+cfg.Project.GetAbsPath()+`
+`+p.GetAbsPath()+`
 
 Give it a try by going there and running `+"`go run main.go`."+`
 Add commands to it by running `+"`gen add [cmdname]`.")
