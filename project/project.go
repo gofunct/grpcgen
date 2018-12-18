@@ -1,7 +1,7 @@
 package project
 
 import (
-	"github.com/gofunct/grpcgen/errors"
+	"github.com/gofunct/grpcgen/logging"
 	"os"
 	"path/filepath"
 	"strings"
@@ -17,7 +17,7 @@ type Project struct {
 // NewProject returns Project with specified project Name.
 func NewProject(projectName string) *Project {
 	if projectName == "" {
-		errors.Exit("can't create project with blank Name")
+		logging.Exit("can't create project with blank Name")
 	}
 
 	p := new(Project)
@@ -30,7 +30,7 @@ func NewProject(projectName string) *Project {
 	// then use GOPATH/src/projectName.
 	if p.AbsPath == "" {
 		wd, err := os.Getwd()
-		errors.IfErr("failed to get working directory", err)
+		logging.IfErr("failed to get working directory", err)
 		for _, SrcPath := range srcPaths {
 			goPath := filepath.Dir(SrcPath)
 			if FilePathHasPrefix(wd, goPath) {
@@ -52,19 +52,19 @@ func NewProject(projectName string) *Project {
 // package.
 func NewProjectFromPath(AbsPath string) *Project {
 	if AbsPath == "" {
-		errors.Exit("can't create project: AbsPath can't be blank")
+		logging.Exit("can't create project: AbsPath can't be blank")
 	}
 	if !filepath.IsAbs(AbsPath) {
-		errors.Exit("can't create project: AbsPath is not absolute")
+		logging.Exit("can't create project: AbsPath is not absolute")
 	}
 
 	// If AbsPath is symlink, use its destination.
 	fi, err := os.Lstat(AbsPath)
-	errors.IfErr("can't read path info: ", err)
+	logging.IfErr("can't read path info: ", err)
 
 	if fi.Mode()&os.ModeSymlink != 0 {
 		path, err := os.Readlink(AbsPath)
-		errors.IfErr("can't read the destination of symlink: ", err)
+		logging.IfErr("can't read the destination of symlink: ", err)
 		AbsPath = path
 	}
 
@@ -93,14 +93,17 @@ func (p *Project) GetCmd() string {
 func InitializeProject(p *Project) {
 	if !PathExists(p.GetAbsPath()) { // If path doesn't yet exist, create it
 		err := os.MkdirAll(p.GetAbsPath(), os.ModePerm)
-		errors.IfErr("failed to make directories", err)
+		logging.IfErr("failed to make directories", err)
 
 	} else if !EmptyPath(p.GetAbsPath()) { // If path exists and is not empty don't use it
-		errors.Exit("Gen will not create a new project in a non empty directory: " + p.GetAbsPath())
+		logging.Exit("Gen will not create a new project in a non empty directory: " + p.GetAbsPath())
 	}
 
 	// We have a directory and it's empty. Time to initialize it.
 	p.CreateMainFile()
+	p.CreateDockerfile()
+	p.CreateMakeFile()
+	p.CreateProtofile()
 	p.CreateRootCmdFile()
 }
 

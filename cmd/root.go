@@ -5,12 +5,11 @@ import (
 )
 
 var (
-	service, packageName, parentName string
+	service, packageName, parentName, gopath, templatePath string
 )
 
 func init() {
 	rootCmd.Flags().StringVar(&service, "service", "", "The protobuf message used for this configuration")
-	rootCmd.AddCommand(addCmd)
 	rootCmd.AddCommand(initCmd)
 }
 
@@ -25,3 +24,4 @@ var (
 func Execute() {
 	rootCmd.Execute()
 }
+

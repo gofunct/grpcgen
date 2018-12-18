@@ -1,0 +1,24 @@
+syntax = "proto3";
+option go_package = "github.com/gofunct/email_service";
+package email_service;
+
+message Email {
+    string from = 1;
+    repeated string to = 2;
+    string subject = 3;
+    string plain_text = 4;
+    string html_alternate = 5;
+    repeated Attachment attachments = 6;
+    map<string, string> headers = 7;
+}
+
+message Attachment {
+    string filename = 1;
+    bytes body = 2;
+}
+
+message EmailResponse {}
+
+service EmailService {
+    rpc Send (Email) returns (EmailResponse) {}
+}

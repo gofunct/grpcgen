@@ -3,7 +3,7 @@ package project
 import (
 	"bytes"
 	"fmt"
-	"github.com/gofunct/grpcgen/errors"
+	"github.com/gofunct/grpcgen/logging"
 	"io"
 	"os"
 	"os/exec"
@@ -28,15 +28,12 @@ func init() {
 		}
 
 		out, err := exec.Command(goExecutable, "env", "GOPATH").Output()
-		if err != nil {
-			errors.Exit(err)
-		}
+		logging.IfErr("failed to execute command", err)
 
 		toolchainGoPath := strings.TrimSpace(string(out))
 		goPaths = filepath.SplitList(toolchainGoPath)
-		if len(goPaths) == 0 {
-			errors.Exit("$GOPATH is not set")
-		}
+		logging.IfErr("$GOPATH is not set", err)
+
 	}
 	srcPaths = make([]string, 0, len(goPaths))
 	for _, goPath := range goPaths {
@@ -46,23 +43,21 @@ func init() {
 
 func EmptyPath(path string) bool {
 	fi, err := os.Stat(path)
-	if err != nil {
-		errors.Exit(err)
-	}
+	logging.IfErr("failed to check path", err)
 
 	if !fi.IsDir() {
 		return fi.Size() == 0
 	}
 
 	f, err := os.Open(path)
-	if err != nil {
-		errors.Exit(err)
-	}
+	logging.IfErr("failed to open path", err)
+
 	defer f.Close()
 
 	names, err := f.Readdirnames(-1)
 	if err != nil && err != io.EOF {
-		errors.Exit(err)
+		logging.IfErr("failed to read directories", err)
+
 	}
 
 	for _, name := range names {
@@ -82,7 +77,8 @@ func PathExists(path string) bool {
 		return true
 	}
 	if !os.IsNotExist(err) {
-		errors.Exit(err)
+		logging.IfErr("", err)
+
 	}
 	return false
 }
@@ -206,7 +202,7 @@ func FilePathHasPrefix(path string, prefix string) bool {
 // TrimScrcPath trims at the beginning of AbsPath the SrcPath.
 func TrimScrcPath(AbsPath, SrcPath string) string {
 	relPath, err := filepath.Rel(SrcPath, AbsPath)
-	errors.IfErr("failed to trim source path", err)
+	logging.IfErr("failed to trim source path", err)
 
 	return relPath
 }

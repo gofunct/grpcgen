@@ -1,46 +1,92 @@
-package cmd
+package {{.File.Package}}_grpctransport
 
+{{$file := .File}}
 
 import (
-	"github.com/gofunct/gotasks/runtime/grpc"
-	"github.com/spf13/cobra"
-	"log"
-	"net"
-	"net/http"
+	context "context"
+        "fmt"
+
+        oldcontext "golang.org/x/net/context"
+	grpctransport "github.com/go-kit/kit/transport/grpc"
+
+        pb "{{cat .GoPWD "/" .DestinationDir | nospace | clean}}/pb"
+        endpoints "{{cat .GoPWD "/" .DestinationDir | nospace | clean}}/endpoints"
 )
 
-// grpcCmd represents the grpc command
-var grpcCmd = &cobra.Command{
-	Use:   "grpc",
-	Short: "start a grpc server with config",
-	Run: Serve(),
+// avoid import errors
+var _ = fmt.Errorf
+
+func MakeGRPCServer(endpoints endpoints.Endpoints) pb.{{.File.Package | title}}ServiceServer {
+     	var options []grpctransport.ServerOption
+        _ = options
+	return &grpcServer{
+		{{range .Service.Method}}
+			{{if or (.ClientStreaming) (.ServerStreaming)}}
+				{{.Name | lower}}: &server{
+					e: endpoints.{{.Name}}Endpoint,
+				},
+			{{else}}
+				{{.Name | lower}}: grpctransport.NewServer(
+					endpoints.{{.Name}}Endpoint,
+					decodeRequest,
+					encode{{.Name}}Response,
+					options...,
+				),
+			{{end}}
+                {{end}}
+	}
 }
 
-func init() { RootCmd.AddCommand(grpcCmd) }
+type grpcServer struct {
+	{{range .Service.Method}}
+		{{if or (.ClientStreaming) (.ServerStreaming)}}
+			{{.Name | lower}} streamHandler
+		{{else}}
+			{{.Name | lower}} grpctransport.Handler
+		{{end}}
+	{{end}}
+}
 
-func Serve() func(cmd *cobra.Command, args []string) {
-	return func(cmd *cobra.Command, args []string) {
-		lis, err := net.Listen("tcp", vi.VString("grpc_port"))
-		if err != nil {
-			log.Fatal("Failed to listen:"+vi.VString("grpc_port"), err)
+{{range .Service.Method}}
+	{{if .ClientStreaming}}
+		func (s *grpcServer) {{.Name}}(server pb.{{$file.Package | title}}Service_{{.Name}}Server) error {
+		        return s.{{.Name | lower}}.Do(server, nil)
 		}
-		tracer, closer, err := Trace(log.JZap)
-		if err != nil {
-			log.Fatal("Cannot initialize Jaeger Tracer %s", zap.Error(err))
+	{{else if .ServerStreaming}}
+		func (s *grpcServer) {{.Name}}(req *pb.{{.Name}}Request, server pb.{{$file.Package | title}}Service_{{.Name}}Server) error {
+		        return s.{{.Name | lower}}.Do(server, req)
 		}
-		defer closer.Close()
+	{{else}}
+		func (s *grpcServer) {{.Name}}(ctx oldcontext.Context, req *pb.{{.InputType | splitArray "." | last}}) (*pb.{{.OutputType | splitArray "." | last}}, error) {
+		_, rep, err := s.{{.Name | lower}}.ServeGRPC(ctx, req)
+			if err != nil {
+				return nil, err
+			}
+			return rep.(*pb.{{.OutputType | splitArray "." | last}}), nil
+		}
 
-		// Set GRPC Interceptors
-		server := NewServer(tracer)
-		
-		//Register your grpc service server here 
-		// ex: api.RegisterTodoServiceServer(server, &db.Store{DB: NewDB()})
+		func encode{{.Name}}Response(ctx context.Context, response interface{}) (interface{}, error) {
+			resp := response.(*pb.{{.OutputType | splitArray "." | last}})
+			return resp, nil
+		}
+	{{end}}
+{{end}}
 
-		mux := NewMux()
-		log.Zap.Debug("Starting debug service..", zap.String("grpc_debug_port", vi.VString("grpc_debug_port")))
-		go func() { http.ListenAndServe(vi.VString("grpc_debug_port"), mux) }()
+func decodeRequest(ctx context.Context, grpcReq interface{}) (interface{}, error) {
+	return grpcReq, nil
+}
 
-		log.Zap.Debug("Starting grpc service..", zap.String("grpc_port", vi.VString("grpc_port")))
-		server.Serve(lis)
+type streamHandler interface{
+	Do(server interface{}, req interface{}) (err error)
+}
+
+type server struct {
+	e endpoints.StreamEndpoint
+}
+
+func (s server) Do(server interface{}, req interface{}) (err error) {
+	if err := s.e(server, req); err != nil {
+		return err
 	}
+	return nil
 }

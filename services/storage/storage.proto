@@ -1,0 +1,28 @@
+syntax = "proto3";
+option go_package = "github.com/gofunct/cloud_storage_service";
+package cloud_storage_service;
+
+message StoreRequest {
+    string filename = 1;
+
+    // The raw data of the object to be stored
+    bytes data = 2;
+}
+
+message DeleteRequest {
+    string filename = 1;
+}
+
+message DeleteResponse {
+    string filename = 1;
+}
+
+message StorageObject {
+    string filename = 1;
+    string url = 2;
+}
+
+service CloudStorageService {
+    rpc Store(StoreRequest) returns (StorageObject) {}
+    rpc Delete(DeleteRequest) returns (DeleteResponse) {}
+}

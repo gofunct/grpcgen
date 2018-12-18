@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/gofunct/grpcgen/errors"
 	"github.com/gofunct/grpcgen/project"
+	"github.com/gofunct/grpcgen/logging"
 	"os"
 	"github.com/spf13/cobra"
 )
@@ -18,7 +18,7 @@ with the appropriate structure for a gen-based CLI application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var p *project.Project
 		wd, err := os.Getwd()
-		errors.IfErr("failed to get working directory", err)
+		logging.IfErr("failed to get working directory", err)
 
 		if len(args) == 0 {
 			p = project.NewProjectFromPath(wd)

@@ -1,28 +1,30 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
 	"os"
+	"fmt"
 )
 
-// RootCmd represents the base command when called without any subcommands
-var RootCmd = &cobra.Command{
-	Use:   "grpcgen",
-	Short: "grpcgen  is a highly configurable grpc server- config.yaml holds all of the config options available for your server",
+var (
+	service string
+)
+
+func init() {
+	rootCmd.Flags().StringVar(&service, "service", "", "The protobuf message used for this configuration")
+}
+
+// rootCmd represents the base command when called without any subcommands
+var rootCmd = &cobra.Command{
+	Use:   "example",
+	Short: "A brief description of your application",
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the RootCmd.
+// This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
-	if err := RootCmd.Execute(); err != nil {
+	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-}
-
-func init() {
-	RootCmd.AddCommand(grpcCmd)
-
-	RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
