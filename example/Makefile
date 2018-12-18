@@ -26,7 +26,7 @@ sessions: services/sessions/sessions.pb.go
 services/sessions/sessions.pb.go:	services/sessions/sessions.proto
 	@protoc --gotemplate_out=destination_dir=services/sessions,template_dir=$(GOPATH)/src/github.com/gofunct/grpcgen/templates:services/sessions services/sessions/sessions.proto
 	gofmt -w services/sessions
-	@protoc --gogo_out=plugins=grpc:services/sessions services/sessions/sessions.proto
+	@protoc --gogo_out=plugins=grpc:. services/sessions/sessions.proto
 
 .PHONY: users
 users: services/users/users.pb.go
@@ -34,7 +34,7 @@ users: services/users/users.pb.go
 services/users/users.pb.go:	services/users/users.proto
 	@protoc --gotemplate_out=destination_dir=services/sessions,template_dir=$(GOPATH)/src/github.com/gofunct/grpcgen/templates:services/users services/users/users.proto
 	gofmt -w services/users
-	@protoc --gogo_out=plugins=grpc:services/users services/users/users.proto
+	@protoc --gogo_out=plugins=grpc:. services/users/users.proto
 
 help: ## help
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST) | sort

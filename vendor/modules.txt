@@ -10,6 +10,8 @@ github.com/go-kit/kit/transport/grpc
 github.com/go-kit/kit/transport/http
 # github.com/go-logfmt/logfmt v0.4.0
 github.com/go-logfmt/logfmt
+# github.com/gogo/protobuf v1.2.0
+github.com/gogo/protobuf/proto
 # github.com/golang/protobuf v1.2.0
 github.com/golang/protobuf/proto
 github.com/golang/protobuf/ptypes
@@ -44,8 +46,6 @@ golang.org/x/net/http2
 golang.org/x/net/http2/hpack
 golang.org/x/net/http/httpguts
 golang.org/x/net/idna
-# golang.org/x/sync v0.0.0-20181108010431-42b317875d0f
-golang.org/x/sync/errgroup
 # golang.org/x/sys v0.0.0-20181217223516-dcdaa6325bcb
 golang.org/x/sys/unix
 golang.org/x/sys/windows
@@ -58,7 +58,6 @@ golang.org/x/text/transform
 google.golang.org/genproto/googleapis/rpc/status
 # google.golang.org/grpc v1.17.0
 google.golang.org/grpc
-google.golang.org/grpc/metadata
 google.golang.org/grpc/balancer
 google.golang.org/grpc/balancer/roundrobin
 google.golang.org/grpc/codes
@@ -76,6 +75,7 @@ google.golang.org/grpc/internal/grpcrand
 google.golang.org/grpc/internal/grpcsync
 google.golang.org/grpc/internal/transport
 google.golang.org/grpc/keepalive
+google.golang.org/grpc/metadata
 google.golang.org/grpc/naming
 google.golang.org/grpc/peer
 google.golang.org/grpc/resolver

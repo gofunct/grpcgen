@@ -14,9 +14,8 @@ require (
 	github.com/go-logfmt/logfmt v0.4.0 // indirect
 	github.com/go-pg/pg v6.15.1+incompatible // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
-	github.com/gogo/protobuf v1.2.0 // indirect
+	github.com/gogo/protobuf v1.2.0
 	github.com/golang/mock v1.2.0 // indirect
-	github.com/golang/protobuf v1.2.0
 	github.com/google/uuid v1.1.0 // indirect
 	github.com/gorilla/context v1.1.1 // indirect
 	github.com/gorilla/handlers v1.4.0
@@ -40,7 +39,7 @@ require (
 	golang.org/x/lint v0.0.0-20181217174547-8f45f776aaf1 // indirect
 	golang.org/x/net v0.0.0-20181217023233-e147a9138326
 	golang.org/x/oauth2 v0.0.0-20181203162652-d668ce993890 // indirect
-	golang.org/x/sync v0.0.0-20181108010431-42b317875d0f
+	golang.org/x/sync v0.0.0-20181108010431-42b317875d0f // indirect
 	golang.org/x/sys v0.0.0-20181217223516-dcdaa6325bcb // indirect
 	golang.org/x/tools v0.0.0-20181218020041-13ba8ad772df // indirect
 	google.golang.org/appengine v1.3.0 // indirect
