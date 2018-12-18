@@ -79,4 +79,4 @@ service AccountService {
     rpc Create (CreateAccountRequest) returns (Account) {}
     rpc Update (UpdateAccountRequest) returns (Account) {}
     rpc Delete (DeleteAccountRequest) returns (google.protobuf.Empty) {}
-
+}

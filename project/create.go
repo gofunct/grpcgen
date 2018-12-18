@@ -343,7 +343,7 @@ service AccountService {
     rpc Create (CreateAccountRequest) returns (Account) {}
     rpc Update (UpdateAccountRequest) returns (Account) {}
     rpc Delete (DeleteAccountRequest) returns (google.protobuf.Empty) {}
-
+}
 `
 	data := make(map[string]interface{})
 	data["importpath"] = path.Join(p.GetName(), filepath.Base(p.GetCmd()))
