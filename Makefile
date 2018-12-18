@@ -1,7 +1,7 @@
 SOURCES :=	$(shell find . -name "*.proto" -not -path ./vendor/\*)
-DOCKER_IMAGE ?=	moul/kafkagw
 TARGETS_GO :=	$(foreach source, $(SOURCES), $(source)_go)
 TARGETS_TMPL :=	$(foreach source, $(SOURCES), $(source)_tmpl)
+DOCKER_IMAGE ?=	grpcgen
 
 service_name =	$(word 2,$(subst /, ,$1))
 
@@ -20,11 +20,12 @@ setup: ## download dependencies and tls certificates
 		github.com/golang/protobuf/{proto,protoc-gen-go} \
 		moul.io/protoc-gen-gotemplate
 
-.PHONY: install
-install: server ## install the service servers
+.PHONY: build
+build: server
 
 server: $(TARGETS_GO) $(TARGETS_TMPL)
-	go install .
+	@mkdir -p bin
+	go build -o bin/grpcgen-server .
 
 $(TARGETS_GO): %_go:
 	protoc --go_out=plugins=grpc:. "$*"
@@ -33,15 +34,9 @@ $(TARGETS_GO): %_go:
 
 $(TARGETS_TMPL): %_tmpl:
 	@mkdir -p $(dir $*)gen
-	protoc -I. --gotemplate_out=destination_dir=services/$(call service_name,$*)/gen,template_dir=vendor/github.com/gofunct/grpcgen/templates:services "$*"
+	protoc -I. --gotemplate_out=destination_dir=services/$(call service_name,$*)/gen,template_dir=templates:services "$*"
 	@rm -rf services/services  # need to investigate why this directory is created
 	gofmt -w $(dir $*)gen
-
-.PHONY: stats
-stats: ## stats
-	wc -l service/service.go cmd/*/*.go pb/*.proto
-	wc -l $(shell find gen -name "*.go")
-
 
 .PHONY: test
 test: ## run all unit tests

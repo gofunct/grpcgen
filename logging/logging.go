@@ -77,7 +77,7 @@ func NewHandlerLogger() handlers.LogFormatter {
 
 func IfErr(msg string, err error) {
 	if err != nil {
-		logrus.Fatal(out, "%s: %s \n",
+		logrus.Fatal(out,
 			color.RedString(msg),
 			logger.WithError(err),
 		)

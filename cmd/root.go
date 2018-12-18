@@ -1,11 +1,13 @@
 package cmd
 
 import (
+	"github.com/gofunct/grpcgen/project"
 	"github.com/spf13/cobra"
 )
 
 var (
 	service, packageName, parentName, gopath, templatePath string
+	newProject = project.NewProjectFromCurrentPath()
 )
 
 func init() {
@@ -15,8 +17,8 @@ func init() {
 
 var (
 	rootCmd = &cobra.Command{
-		Use:   "gen",
-		Short: "gen is a utility for easily creating highly configurable golang microservices",
+		Use:   "grpcgen",
+		Short: "grpcgen is a utility for easily creating highly configurable golang microservices",
 	}
 )
 

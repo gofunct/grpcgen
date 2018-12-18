@@ -1,8 +1,18 @@
-SOURCES :=	$(shell find . -name "*.proto" -not -path ./vendor/\*)
+package project
+
+import (
+	"github.com/gofunct/grpcgen/logging"
+	"github.com/gofunct/grpcgen/project/utils"
+	"path"
+	"path/filepath"
+)
+
+func (p *Project) CreateMakeFile() {
+	mainTemplate := `SOURCES :=	$(shell find . -name "*.proto" -not -path ./vendor/\*)
 TARGETS_GO :=	$(foreach source, $(SOURCES), $(source)_go)
 TARGETS_TMPL :=	$(foreach source, $(SOURCES), $(source)_tmpl)
-import_path := github.com/gofunct/grpcgen/example/cmd
-app_name = example
+import_path := {{ .importpath }}
+app_name = {{ .appName }}
 service_name =	$(word 2,$(subst /, ,$1))
 
 .PHONY: setup
@@ -38,3 +48,14 @@ services/users/users.pb.go:	services/users/users.proto
 
 help: ## help
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST) | sort
+`
+	data := make(map[string]interface{})
+	data["importpath"] = path.Join(p.GetName(), filepath.Base(p.GetCmd()))
+	data["appName"] = path.Base(p.GetName())
+	mainScript, err := utils.ExecTemplate(mainTemplate, data)
+	logging.IfErr("failed to execute template", err)
+
+	err = utils.WriteStringToFile(filepath.Join(p.GetAbsPath(), "Makefile"), mainScript)
+	logging.IfErr("failed to write file", err)
+
+}
