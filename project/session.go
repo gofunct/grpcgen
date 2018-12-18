@@ -7,7 +7,6 @@ import (
 	"path/filepath"
 )
 
-
 func (p *Project) CreateSessionsProto() {
 	mainTemplate := session
 	data := make(map[string]interface{})

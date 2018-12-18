@@ -1,13 +1,11 @@
 package project
 
-
 import (
 	"github.com/gofunct/grpcgen/logging"
 	"github.com/gofunct/grpcgen/project/utils"
 	"os"
 	"path/filepath"
 )
-
 
 func (p *Project) CreateUsersProto() {
 	mainTemplate := users

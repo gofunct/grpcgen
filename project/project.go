@@ -19,6 +19,7 @@ type Project struct {
 func InitializeProject(p *Project) {
 	CheckPathBeforeProject(p)
 	p.CreateMainFile()
+	p.CreatePrototoolfile()
 	p.CreateGitIgnore()
 	p.CreateDockerfile()
 	p.CreateMakeFile()
