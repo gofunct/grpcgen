@@ -9,14 +9,18 @@ import (
 
 func (p *Project) CreateUsersProto() {
 	mainTemplate := users
+	serviceTemplate := userService
 	data := make(map[string]interface{})
 
 	mainScript, err := utils.ExecTemplate(mainTemplate, data)
 	logging.IfErr("failed to execute template", err)
 	os.MkdirAll("services/users", os.ModePerm)
+	serviceScript, err := utils.ExecTemplate(serviceTemplate, data)
+	logging.IfErr("failed to execute template", err)
 
 	err = utils.WriteStringToFile(filepath.Join(p.GetAbsPath()+"/services/users", "users.proto"), mainScript)
 	logging.IfErr("failed to write file", err)
+	err = utils.WriteStringToFile(filepath.Join(p.GetAbsPath()+"/services/users", "service.go"), serviceScript)
 
 }
 
@@ -48,5 +52,26 @@ message GetUserResponse {
 message User {
   string id = 1;
   string name = 2;
+}
+`
+var userService = `package usersvc
+
+import (
+	"fmt"
+
+	"golang.org/x/net/context"
+
+)
+
+type Service struct{}
+
+func New() UserServiceServer { return &Service{} }
+
+func (svc *Service) CreateUser(ctx context.Context, in *CreateUserRequest) (*CreateUserResponse, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
+func (svc *Service) GetUser(ctx context.Context, in *GetUserRequest) (*GetUserResponse, error) {
+	return nil, fmt.Errorf("not implemented")
 }
 `
