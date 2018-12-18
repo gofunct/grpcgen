@@ -1,26 +1,16 @@
-package project
-
-import (
-	"github.com/gofunct/grpcgen/logging"
-	"github.com/gofunct/grpcgen/project/utils"
-	"path"
-	"path/filepath"
-)
-
-func (p *Project) CreateGoKitServerCmdFile() {
-	template := `package cmd
+package cmd
 
 import (
 	"fmt"
 	"github.com/go-kit/kit/log"
-	"{{ .importpath }}/services/sessions"
-	"{{ .importpath }}/sessions/endpoints"
-	"{{ .importpath }}/sessions/transports/grpc"
-	"{{ .importpath }}/sessions/transports/http"
-	"{{ .importpath }}/users"
-	"{{ .importpath }}/users/endpoints"
-	"{{ .importpath }}/users/transports/grpc"
-	"{{ .importpath }}/users/transports/http"
+	"github.com/gofunct/grpcgen/example/services/sessions"
+	"github.com/gofunct/grpcgen/example/services/sessions/endpoints"
+	"github.com/gofunct/grpcgen/example/services/sessions/transports/grpc"
+	"github.com/gofunct/grpcgen/example/services/sessions/transports/http"
+	"github.com/gofunct/grpcgen/example/services/users"
+	"github.com/gofunct/grpcgen/example/services/users/endpoints"
+	"github.com/gofunct/grpcgen/example/services/users/transports/grpc"
+	"github.com/gofunct/grpcgen/example/services/users/transports/http"
 	"github.com/gorilla/handlers"
 	"google.golang.org/grpc"
 	"net"
@@ -36,6 +26,12 @@ import (
 var serverCmd = &cobra.Command{
 	Use:   "server",
 	Short: "A brief description of your command",
+	Long: `A longer description that spans multiple lines and likely contains examples
+and usage of using your command. For example:
+
+Cobra is a CLI library for Go that empowers applications.
+This application is a tool to generate the needed files
+to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		mux := http.NewServeMux()
 		errc := make(chan error)
@@ -93,15 +89,4 @@ var serverCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(serverCmd)
-}
-
-`
-	data := make(map[string]interface{})
-	data["appName"] = path.Base(p.GetName())
-	data["importpath"] = path.Join(p.GetName(), filepath.Base(p.GetCmd()))
-
-	serveCmdScript, err := utils.ExecTemplate(template, data)
-	logging.IfErr("failed to execute template", err)
-	err = utils.WriteStringToFile(filepath.Join(p.GetCmd(), "server.go"), serveCmdScript)
-	logging.IfErr("failed to write file", err)
 }

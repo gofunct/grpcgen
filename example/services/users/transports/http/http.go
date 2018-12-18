@@ -8,8 +8,8 @@ import (
 
 	gokit_endpoint "github.com/go-kit/kit/endpoint"
 	httptransport "github.com/go-kit/kit/transport/http"
-	pb "github.com/gofunct/grpcgen/example/services/sessions"
-	endpoints "github.com/gofunct/grpcgen/example/services/sessions/endpoints"
+	pb "github.com/gofunct/grpcgen/example/services/users"
+	endpoints "github.com/gofunct/grpcgen/example/services/users/endpoints"
 )
 
 var _ = log.Printf

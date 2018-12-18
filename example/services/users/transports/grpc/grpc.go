@@ -7,8 +7,8 @@ import (
 	grpctransport "github.com/go-kit/kit/transport/grpc"
 	oldcontext "golang.org/x/net/context"
 
-	pb "github.com/gofunct/grpcgen/example/services/sessions"
-	endpoints "github.com/gofunct/grpcgen/example/services/sessions/endpoints"
+	pb "github.com/gofunct/grpcgen/example/services/users"
+	endpoints "github.com/gofunct/grpcgen/example/services/users/endpoints"
 )
 
 // avoid import errors

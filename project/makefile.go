@@ -42,7 +42,7 @@ services/sessions/sessions.pb.go:	services/sessions/sessions.proto
 users: services/users/users.pb.go
 
 services/users/users.pb.go:	services/users/users.proto
-	@protoc --gotemplate_out=destination_dir=services/sessions,template_dir=$(GOPATH)/src/github.com/gofunct/grpcgen/templates:services/users services/users/users.proto
+	@protoc --gotemplate_out=destination_dir=services/users,template_dir=$(GOPATH)/src/github.com/gofunct/grpcgen/templates:services/users services/users/users.proto
 	gofmt -w services/users
 	@protoc --gogo_out=plugins=grpc:. services/users/users.proto
 

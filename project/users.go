@@ -54,7 +54,7 @@ message User {
   string name = 2;
 }
 `
-var userService = `package usersvc
+var userService = `package user
 
 import (
 	"fmt"

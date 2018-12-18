@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/go-kit/kit/endpoint"
-	pb "github.com/gofunct/grpcgen/example/services/sessions"
+	pb "github.com/gofunct/grpcgen/example/services/users"
 	oldcontext "golang.org/x/net/context"
 )
 
