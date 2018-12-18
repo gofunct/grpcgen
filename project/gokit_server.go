@@ -14,13 +14,13 @@ import (
 	"fmt"
 	"github.com/go-kit/kit/log"
 	"{{ .importpath }}/services/sessions"
-	"{{ .importpath }}/sessions/endpoints"
-	"{{ .importpath }}/sessions/transports/grpc"
-	"{{ .importpath }}/sessions/transports/http"
-	"{{ .importpath }}/users"
-	"{{ .importpath }}/users/endpoints"
-	"{{ .importpath }}/users/transports/grpc"
-	"{{ .importpath }}/users/transports/http"
+	"{{ .importpath }}/services/sessions/endpoints"
+	"{{ .importpath }}/services/sessions/transports/grpc"
+	"{{ .importpath }}/services/sessions/transports/http"
+	"{{ .importpath }}/services/users"
+	"{{ .importpath }}/services/users/endpoints"
+	"{{ .importpath }}/services/users/transports/grpc"
+	"{{ .importpath }}/services/users/transports/http"
 	"github.com/gorilla/handlers"
 	"google.golang.org/grpc"
 	"net"
@@ -98,7 +98,7 @@ func init() {
 `
 	data := make(map[string]interface{})
 	data["appName"] = path.Base(p.GetName())
-	data["importpath"] = path.Join(p.GetName(), filepath.Base(p.GetCmd()))
+	data["importpath"] = path.Join(p.GetName())
 
 	serveCmdScript, err := utils.ExecTemplate(template, data)
 	logging.IfErr("failed to execute template", err)

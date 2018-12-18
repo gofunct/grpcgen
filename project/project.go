@@ -26,6 +26,7 @@ func InitializeProject(p *Project) {
 	p.CreateRootCmdFile()
 	p.CreateSessionsProto()
 	p.CreateUsersProto()
+	p.CreateGoKitServerCmdFile()
 }
 
 func NewGokitServerCmd(p *Project) {
