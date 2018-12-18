@@ -9,6 +9,7 @@ import (
 
 func (p *Project) CreateMakeFile() {
 	mainTemplate := `SOURCES :=	$(shell find . -name "*.proto" -not -path ./vendor/\*)
+TEMPLATES := $(shell find ~/go/src/github.com/gofunct/grpcgen/templates -name "*.tmpl" -not -path ./vendor/\*)
 TARGETS_GO :=	$(foreach source, $(SOURCES), $(source)_go)
 TARGETS_TMPL :=	$(foreach source, $(SOURCES), $(source)_tmpl)
 import_path := {{ .importpath }}
@@ -30,21 +31,43 @@ setup: ## download dependencies and tls certificates
 		github.com/golang/protobuf/{proto,protoc-gen-go} \
 		moul.io/protoc-gen-gotemplate
 
-.PHONY: sessions
-sessions: services/sessions/sessions.pb.go
 
-services/sessions/sessions.pb.go:	services/sessions/sessions.proto
-	@protoc --gotemplate_out=destination_dir=services/sessions,template_dir=$(GOPATH)/src/github.com/gofunct/grpcgen/templates:services/sessions services/sessions/sessions.proto
-	gofmt -w services/sessions
-	@protoc --gogo_out=plugins=grpc:. services/sessions/sessions.proto
+.PHONY: list
+list: list-templates list-protos
 
-.PHONY: users
-users: services/users/users.pb.go
+.PHONY: list-templates
+list-templates:
+	@echo "using templates:"
+	@find ~/go/src/github.com/gofunct/grpcgen/templates -name "*.tmpl" -not -path ./vendor/\*
 
-services/users/users.pb.go:	services/users/users.proto
-	@protoc --gotemplate_out=destination_dir=services/users,template_dir=$(GOPATH)/src/github.com/gofunct/grpcgen/templates:services/users services/users/users.proto
-	gofmt -w services/users
-	@protoc --gogo_out=plugins=grpc:. services/users/users.proto
+.PHONY: list-protos
+list-protos:
+	@echo "using protos:"
+	@find . -name "*.proto" -not -path ./vendor/\*
+
+.PHONY: session
+session: services/session/session.pb.go
+
+services/session/session.pb.go:	services/session/session.proto
+	@protoc --gotemplate_out=destination_dir=services/session,template_dir=$(GOPATH)/src/github.com/gofunct/grpcgen/templates:services/session services/session/session.proto
+	gofmt -w services/session
+	@protoc --gogo_out=plugins=grpc:. services/session/session.proto
+
+.PHONY: user
+user: services/user/user.pb.go
+
+services/user/user.pb.go:	services/user/user.proto
+	@protoc --gotemplate_out=destination_dir=services/user,template_dir=$(GOPATH)/src/github.com/gofunct/grpcgen/templates:services/user services/user/user.proto
+	gofmt -w services/user
+	@protoc --gogo_out=plugins=grpc:. services/user/user.proto
+
+.PHONY: account
+account: services/account/account.pb.go
+
+services/account/account.pb.go:	services/account/account.proto
+	@protoc --gotemplate_out=destination_dir=services/account,template_dir=$(GOPATH)/src/github.com/gofunct/grpcgen/templates:services/account services/account/account.proto
+	gofmt -w services/account
+	@protoc --gogo_out=plugins=grpc:. services/account/account.proto
 
 help: ## help
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST) | sort

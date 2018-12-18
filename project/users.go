@@ -18,10 +18,10 @@ func (p *Project) CreateUsersProto() {
 	serviceScript, err := utils.ExecTemplate(serviceTemplate, data)
 	logging.IfErr("failed to execute template", err)
 
-	err = utils.WriteStringToFile(filepath.Join(p.GetAbsPath()+"/services/users", "users.proto"), mainScript)
+	err = utils.WriteStringToFile(filepath.Join(p.GetAbsPath()+"/services/user", "user.proto"), mainScript)
 	logging.IfErr("failed to write file", err)
-	err = utils.WriteStringToFile(filepath.Join(p.GetAbsPath()+"/services/users", "service.go"), serviceScript)
-
+	err = utils.WriteStringToFile(filepath.Join(p.GetAbsPath()+"/services/user", "service.go"), serviceScript)
+	logging.IfErr("failed to write file", err)
 }
 
 var users = `syntax = "proto3";

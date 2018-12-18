@@ -18,10 +18,10 @@ func (p *Project) CreateSessionsProto() {
 	serviceScript, err := utils.ExecTemplate(serviceTemplate, data)
 	logging.IfErr("failed to execute template", err)
 
-	err = utils.WriteStringToFile(filepath.Join(p.GetAbsPath()+"/services/sessions", "sessions.proto"), mainScript)
+	err = utils.WriteStringToFile(filepath.Join(p.GetAbsPath()+"/services/session", "session.proto"), mainScript)
 	logging.IfErr("failed to write file", err)
-	err = utils.WriteStringToFile(filepath.Join(p.GetAbsPath()+"/services/sessions", "service.go"), serviceScript)
-
+	err = utils.WriteStringToFile(filepath.Join(p.GetAbsPath()+"/services/session", "service.go"), serviceScript)
+	logging.IfErr("failed to write file", err)
 }
 
 var session = `syntax = "proto3";
