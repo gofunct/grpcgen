@@ -1,0 +1,6 @@
+[submodule "rpctemplates"]
+	path = rpctemplates
+	url = https://github.com/gofunct/rpctemplates.git
+[submodule "templates/gokitgen"]
+	path = templates/gokitgen
+	url = https://github.com/gofunct/gokitgen.git

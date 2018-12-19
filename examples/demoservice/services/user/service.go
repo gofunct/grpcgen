@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"golang.org/x/net/context"
-
 )
 
 type Service struct{}

@@ -2,9 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ff8fd0f-ef1f-4bd2-a7d9-93178cece9fe" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/cmd/proxy.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/proxy.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/gokitgen" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/cmd/root.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/cmd/server.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/prototool.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/services/account/account.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/services/session/service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/services/session/session.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/services/user/service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/services/user/user.proto" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/proxy.go" beforeDir="false" afterPath="$PROJECT_DIR$/project/proxy.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/makefile.go" beforeDir="false" afterPath="$PROJECT_DIR$/project/makefile.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/client/grpc/client.go.tmpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/endpoints/endpoints.go.tmpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/gateway/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/gatewaygen/gateway/Dockerfile.tmpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/gatewaygen/gateway/config.yaml.tmpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/gatewaygen/gateway/main.go.tmpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/transports/grpc/grpc.go.tmpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/transports/http/http.go.tmpl" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/modules.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/modules.txt" afterDir="false" />
     </list>
     <ignored path="vendor/" />
@@ -63,13 +86,13 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="Dockerfile" value="4" />
-          <entry key="Makefile" value="15" />
-          <entry key="gitignore" value="4" />
-          <entry key="go" value="271" />
+          <entry key="Makefile" value="16" />
+          <entry key="gitignore" value="5" />
+          <entry key="go" value="276" />
           <entry key="md" value="7" />
           <entry key="proto" value="40" />
           <entry key="sh" value="3" />
-          <entry key="tmpl" value="80" />
+          <entry key="tmpl" value="83" />
           <entry key="yaml" value="9" />
         </counts>
       </usages-collector>
@@ -77,10 +100,10 @@
         <counts>
           <entry key="Bash" value="3" />
           <entry key="Dockerfile" value="4" />
-          <entry key="Go" value="271" />
-          <entry key="Makefile" value="18" />
+          <entry key="Go" value="276" />
+          <entry key="Makefile" value="19" />
           <entry key="Markdown" value="7" />
-          <entry key="PLAIN_TEXT" value="81" />
+          <entry key="PLAIN_TEXT" value="85" />
           <entry key="PROTO" value="40" />
           <entry key="YAML" value="9" />
         </counts>
@@ -88,7 +111,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Dockerfile" value="58" />
-          <entry key="Makefile" value="1219" />
+          <entry key="Makefile" value="1261" />
           <entry key="gitignore" value="7" />
           <entry key="go" value="7681" />
           <entry key="proto" value="5" />
@@ -100,7 +123,7 @@
         <counts>
           <entry key="Dockerfile" value="58" />
           <entry key="Go" value="7681" />
-          <entry key="Makefile" value="1219" />
+          <entry key="Makefile" value="1261" />
           <entry key="PLAIN_TEXT" value="262" />
           <entry key="PROTO" value="5" />
           <entry key="YAML" value="9" />
@@ -119,14 +142,70 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cmd/proxy.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="795">
-              <caret line="53" selection-end-line="53" />
-              <folding>
-                <element signature="e#13#220#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="330">
+              <caret line="24" column="1" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cmd/templates.go">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/makefile.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="73" column="126" selection-start-line="73" selection-start-column="126" selection-end-line="73" selection-end-column="126" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/demoservice/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/cmdgen/doc.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="14" selection-start-column="14" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/dbgen/doc.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="13" selection-start-column="13" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/projectgen/doc.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="18" selection-start-column="18" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/protogen/docs.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="16" selection-start-column="16" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -134,7 +213,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/proxy.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4592">
+            <state relative-caret-position="150">
               <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
               <folding>
                 <element signature="e#17#160#0" expanded="true" />
@@ -228,10 +307,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/proto/session/service.go" />
-        <option value="$PROJECT_DIR$/project/files/root.go" />
-        <option value="$PROJECT_DIR$/project/create.go" />
-        <option value="$PROJECT_DIR$/project/utils/utils.go" />
         <option value="$PROJECT_DIR$/project/dockerfile.go" />
         <option value="$PROJECT_DIR$/project/main.go" />
         <option value="$PROJECT_DIR$/project/root.go" />
@@ -272,17 +347,21 @@
         <option value="$PROJECT_DIR$/project/server.go" />
         <option value="$PROJECT_DIR$/project/accounts.go" />
         <option value="$PROJECT_DIR$/project/project.go" />
-        <option value="$PROJECT_DIR$/example/Makefile" />
-        <option value="$PROJECT_DIR$/project/makefile.go" />
         <option value="$PROJECT_DIR$/templates/gateway/Dockerfile.tmpl" />
         <option value="$PROJECT_DIR$/templates/gateway/config.yaml.tmpl" />
         <option value="$PROJECT_DIR$/cmd/templates.go" />
         <option value="$PROJECT_DIR$/project/proxy.go" />
         <option value="$PROJECT_DIR$/cmd/proxy.go" />
+        <option value="$PROJECT_DIR$/example/Makefile" />
+        <option value="$PROJECT_DIR$/project/makefile.go" />
+        <option value="$PROJECT_DIR$/templates/cmdgen/doc.go" />
+        <option value="$PROJECT_DIR$/templates/dbgen/doc.go" />
+        <option value="$PROJECT_DIR$/templates/projectgen/doc.go" />
+        <option value="$PROJECT_DIR$/templates/protogen/docs.go" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1680" />
     <option name="height" value="947" />
@@ -304,17 +383,7 @@
             <path>
               <item name="grpcgen" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="cmd" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="grpcgen" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="grpcgen" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="project" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -337,19 +406,19 @@
     <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/gatewaygen" />
+      <recent name="$PROJECT_DIR$/examples/demoservice" />
+      <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$/templates/gokit/transports/http" />
+      <recent name="$PROJECT_DIR$/templates/gokit/transports/grpc" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/project/commands" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/proto" />
       <recent name="$PROJECT_DIR$/project/server" />
       <recent name="$PROJECT_DIR$/project/proxy" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/templates" />
-      <recent name="$PROJECT_DIR$/templates/gokit/transports/http" />
-      <recent name="$PROJECT_DIR$/templates/gokit/transports/grpc" />
-      <recent name="$PROJECT_DIR$/templates/gokit/endpoints" />
-      <recent name="$PROJECT_DIR$/templates/gokit/client/grpc" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -365,10 +434,10 @@
     </option>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="23" width="1680" height="947" extended-state="6" />
+    <frame x="0" y="23" width="1680" height="947" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26495728" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26800978" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -398,34 +467,6 @@
     <proxy>direct</proxy>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/transports/http/http.go.tmpl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="64" selection-start-line="10" selection-start-column="64" selection-end-line="10" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/services/sessions/sessions.proto" />
-    <entry file="file://$PROJECT_DIR$/example/services/sessions/client/grpc/client.go" />
-    <entry file="file://$PROJECT_DIR$/example/services/sessions/transports/grpc/grpc.go" />
-    <entry file="file://$PROJECT_DIR$/example/services/sessions/sessions.pb.go" />
-    <entry file="file://$PROJECT_DIR$/templates/transports/grpc/grpc.go.tmpl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-731">
-          <caret line="11" column="64" selection-start-line="11" selection-start-column="64" selection-end-line="11" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/services/users/transports/grpc/grpc.go" />
-    <entry file="file://$PROJECT_DIR$/example/services/users/transports/http/http.go" />
-    <entry file="file://$PROJECT_DIR$/example/services/users/service.go" />
-    <entry file="file://$PROJECT_DIR$/project/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="19" column="16" selection-start-line="19" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cmd/server.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -488,20 +529,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/example/services/session/service.go" />
-    <entry file="file://$PROJECT_DIR$/example/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/makefile.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="11" column="109" selection-start-line="11" selection-start-column="109" selection-end-line="11" selection-end-column="109" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hack/build.sh" />
     <entry file="file://$PROJECT_DIR$/hack/generate_gateway.sh" />
     <entry file="file://$PROJECT_DIR$/hack/install-protobuf.sh" />
@@ -547,7 +574,9 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/temp/cmd/proxy.go" />
-    <entry file="file://$PROJECT_DIR$/cmd/templates.go" />
+    <entry file="file://$PROJECT_DIR$/cmd/templates.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -557,7 +586,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project/proxy.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4592">
+        <state relative-caret-position="150">
           <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
           <folding>
             <element signature="e#17#160#0" expanded="true" />
@@ -567,11 +596,76 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cmd/proxy.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="53" selection-end-line="53" />
-          <folding>
-            <element signature="e#13#220#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="330">
+          <caret line="24" column="1" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="64" selection-start-line="8" selection-end-line="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/makefile.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="73" column="126" selection-start-line="73" selection-start-column="126" selection-end-line="73" selection-end-column="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/gatewaygen/gateway/doc.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/gatewaygen/gateway/main.go.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/gatewaygen/gateway/Dockerfile.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/gatewaygen/gateway/config.yaml.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-23">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/demoservice/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/cmdgen/doc.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="14" selection-start-column="14" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/dbgen/doc.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/projectgen/doc.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="18" selection-start-column="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/protogen/docs.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="16" selection-start-column="16" selection-end-column="16" />
         </state>
       </provider>
     </entry>

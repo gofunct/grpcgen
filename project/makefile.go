@@ -18,12 +18,13 @@ service_name =	$(word 2,$(subst /, ,$1))
 
 .PHONY: setup
 setup: ## download dependencies and tls certificates
+	brew install protobuf
 	brew install prototool
 	go get -u \
 		google.golang.org/grpc \
+		github.com/golang/protobuf/protoc-gen-go \
 		github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway \
 		github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger \
-		github.com/golang/protobuf/protoc-gen-go \
 		github.com/gogo/protobuf/protoc-gen-gogo \
 		github.com/gogo/protobuf/protoc-gen-gogofast \
 		github.com/ckaznocha/protoc-gen-lint \

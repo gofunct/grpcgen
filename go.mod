@@ -14,13 +14,14 @@ require (
 	github.com/go-logfmt/logfmt v0.4.0 // indirect
 	github.com/go-pg/pg v6.15.1+incompatible // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
+	github.com/gofunct/rpctemplates v0.0.0-20181219062029-2b831dcd1490 // indirect
 	github.com/gogo/protobuf v1.2.0 // indirect
 	github.com/golang/mock v1.2.0 // indirect
 	github.com/google/uuid v1.1.0 // indirect
 	github.com/gorilla/context v1.1.1 // indirect
 	github.com/gorilla/handlers v1.4.0
 	github.com/gorilla/mux v1.6.2 // indirect
-	github.com/grpc-ecosystem/grpc-gateway v1.6.2 // indirect
+	github.com/grpc-ecosystem/grpc-gateway v1.6.2
 	github.com/huandu/xstrings v1.2.0 // indirect
 	github.com/iancoleman/strcase v0.0.0-20180726023541-3605ed457bf7 // indirect
 	github.com/imdario/mergo v0.3.6 // indirect
@@ -36,7 +37,7 @@ require (
 	github.com/sirupsen/logrus v1.2.0
 	github.com/spf13/cobra v0.0.3
 	github.com/spf13/pflag v1.0.3
-	github.com/spf13/viper v1.3.1 // indirect
+	github.com/spf13/viper v1.3.1
 	github.com/xlab/treeprint v0.0.0-20181112141820-a009c3971eca // indirect
 	golang.org/x/lint v0.0.0-20181217174547-8f45f776aaf1 // indirect
 	golang.org/x/net v0.0.0-20181217023233-e147a9138326

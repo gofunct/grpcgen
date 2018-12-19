@@ -1,5 +1,5 @@
 SOURCES :=	$(shell find . -name "*.proto" -not -path ./vendor/\*)
-TEMPLATES := $(shell find ~/go/src/github.com/gofunct/grpcgen/templates -name "*.tmpl" -not -path ./vendor/\*)
+TEMPLATES := $(shell find ~/go/src/github.com/gofunct/grpctemplates -name "*.tmpl" -not -path ./vendor/\*)
 TARGETS_GO :=	$(foreach source, $(SOURCES), $(source)_go)
 TARGETS_TMPL :=	$(foreach source, $(SOURCES), $(source)_tmpl)
 import_path := github.com/gofunct/grpcgen/example/cmd
@@ -8,12 +8,13 @@ service_name =	$(word 2,$(subst /, ,$1))
 
 .PHONY: setup
 setup: ## download dependencies and tls certificates
+	brew install protobuf
 	brew install prototool
 	go get -u \
 		google.golang.org/grpc \
+		github.com/golang/protobuf/protoc-gen-go \
 		github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway \
 		github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger \
-		github.com/golang/protobuf/protoc-gen-go \
 		github.com/gogo/protobuf/protoc-gen-gogo \
 		github.com/gogo/protobuf/protoc-gen-gogofast \
 		github.com/ckaznocha/protoc-gen-lint \
