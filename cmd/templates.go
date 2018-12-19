@@ -1,15 +1,27 @@
-package project
+package cmd
 
 import (
 	"github.com/gofunct/grpcgen/logging"
 	"github.com/gofunct/grpcgen/project/utils"
-	"github.com/spf13/pflag"
 	"path/filepath"
-	"flag"
 )
 
-func CreateProxyCmdFile(p *Project) {
-	template := `
+func Generate(tpl string, file string) {
+	template := tpl
+	rootCmd.Flags().StringVar(&service, "service", "", "The gRPC backend service to proxy.")
+	data := make(map[string]interface{})
+	data["viper"] = true
+	data["service"] = service
+
+	script, err := utils.ExecTemplate(template, data)
+	logging.IfErr("failed to execute template", err)
+	err = utils.WriteStringToFile(filepath.Join(newProject.GetCmd(), file), script)
+	logging.IfErr("failed to write file", err)
+
+}
+
+
+var proxyTemplate = `package cmd
 import (
 	"encoding/json"
 	"flag"
@@ -324,21 +336,4 @@ var proxyCmd = &cobra.Command{
 		})
 	},
 }
-
 `
-	var service string
-	pflag.StringVar(&service, "service", "", "The gRPC backend service to proxy.")
-
-	pflag.CommandLine.AddGoFlagSet(flag.CommandLine)
-	pflag.Parse()
-
-	data := make(map[string]interface{})
-	data["viper"] = true
-	data["service"] = service
-
-	proxyScript, err := utils.ExecTemplate(template, data)
-	logging.IfErr("failed to execute template", err)
-	err = utils.WriteStringToFile(filepath.Join(p.GetCmd(), "proxy.go"), proxyScript)
-	logging.IfErr("failed to write file", err)
-
-}

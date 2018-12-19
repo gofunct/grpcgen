@@ -1,15 +1,5 @@
-package project
+package main
 
-import (
-	"github.com/gofunct/grpcgen/logging"
-	"github.com/gofunct/grpcgen/project/utils"
-	"github.com/spf13/pflag"
-	"path/filepath"
-	"flag"
-)
-
-func CreateProxyCmdFile(p *Project) {
-	template := `
 import (
 	"encoding/json"
 	"flag"
@@ -236,10 +226,10 @@ func SetupMux(ctx context.Context, cfg proxyConfig) *http.ServeMux {
 	// If you get a compilation error that gw.Register${SERVICE}HandlerFromEndpoint
 	// does not exist, it's because you haven't added any google.api.http annotations
 	// to your proto. Add some!
-	// err := gw.Register${SERVICE}HandlerFromEndpoint(ctx, gwmux, cfg.backend, opts)
-	//  if err != nil {
-	// 	logrus.Fatalf("Could not register gateway: %v", err)
-	// }
+	err := gw.Register${SERVICE}HandlerFromEndpoint(ctx, gwmux, cfg.backend, opts)
+	if err != nil {
+		logrus.Fatalf("Could not register gateway: %v", err)
+	}
 
 	prefix := sanitizeApiPrefix(cfg.apiPrefix)
 	logrus.Infof("API prefix is: %s", prefix)
@@ -286,11 +276,8 @@ func SignalRunner(runner, stopper func()) {
 	}
 }
 
-// rootCmd represents the base command when called without any subcommands
-var proxyCmd = &cobra.Command{
-	Use:   "proxy",
-	Short: "A brief description of your application",
-	Run: func(cmd *cobra.Command, args []string) {
+func main() {
+
 	cfg := SetupViper()
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
@@ -322,23 +309,4 @@ var proxyCmd = &cobra.Command{
 			shutdown, _ := context.WithTimeout(ctx, 10*time.Second)
 			server.Shutdown(shutdown)
 		})
-	},
-}
-
-`
-	var service string
-	pflag.StringVar(&service, "service", "", "The gRPC backend service to proxy.")
-
-	pflag.CommandLine.AddGoFlagSet(flag.CommandLine)
-	pflag.Parse()
-
-	data := make(map[string]interface{})
-	data["viper"] = true
-	data["service"] = service
-
-	proxyScript, err := utils.ExecTemplate(template, data)
-	logging.IfErr("failed to execute template", err)
-	err = utils.WriteStringToFile(filepath.Join(p.GetCmd(), "proxy.go"), proxyScript)
-	logging.IfErr("failed to write file", err)
-
 }
