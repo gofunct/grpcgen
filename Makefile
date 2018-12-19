@@ -63,5 +63,19 @@ docker.run:
 docker.test: docker.build
 	docker run $(DOCKER_IMAGE) make test
 
+push-submodules: ## push all submodules
+	go mod vendor
+	git submodule foreach git add .
+	git submodule foreach git commit -m "update"
+	git submodule foreach git push origin master
+
+
+push-grpcgen: ## push all submodules
+	go mod vendor
+	git add .
+	git commit -m xargs
+	git push origin master
+
+
 help: ## help
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST) | sort

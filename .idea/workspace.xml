@@ -1,34 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ff8fd0f-ef1f-4bd2-a7d9-93178cece9fe" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/gokitgen" afterDir="false" />
+    <list default="true" id="4ff8fd0f-ef1f-4bd2-a7d9-93178cece9fe" name="Default Changelist" comment="init">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/cmd/root.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/cmd/server.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/main.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/prototool.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/services/account/account.proto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/services/session/service.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/services/session/session.proto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/services/user/service.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/services/user/user.proto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/makefile.go" beforeDir="false" afterPath="$PROJECT_DIR$/project/makefile.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/client/grpc/client.go.tmpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/endpoints/endpoints.go.tmpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/gateway/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/gatewaygen/gateway/Dockerfile.tmpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/gatewaygen/gateway/config.yaml.tmpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/gatewaygen/gateway/main.go.tmpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/transports/grpc/grpc.go.tmpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/transports/http/http.go.tmpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/modules.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/modules.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/gokitgen" beforeDir="false" afterPath="$PROJECT_DIR$/templates/gokitgen" afterDir="false" />
     </list>
     <ignored path="vendor/" />
     <ignored path="idea/" />
@@ -86,9 +62,9 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="Dockerfile" value="4" />
-          <entry key="Makefile" value="16" />
+          <entry key="Makefile" value="17" />
           <entry key="gitignore" value="5" />
-          <entry key="go" value="276" />
+          <entry key="go" value="278" />
           <entry key="md" value="7" />
           <entry key="proto" value="40" />
           <entry key="sh" value="3" />
@@ -100,8 +76,8 @@
         <counts>
           <entry key="Bash" value="3" />
           <entry key="Dockerfile" value="4" />
-          <entry key="Go" value="276" />
-          <entry key="Makefile" value="19" />
+          <entry key="Go" value="278" />
+          <entry key="Makefile" value="20" />
           <entry key="Markdown" value="7" />
           <entry key="PLAIN_TEXT" value="85" />
           <entry key="PROTO" value="40" />
@@ -111,11 +87,12 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Dockerfile" value="58" />
-          <entry key="Makefile" value="1261" />
+          <entry key="Makefile" value="1456" />
           <entry key="gitignore" value="7" />
           <entry key="go" value="7681" />
           <entry key="proto" value="5" />
           <entry key="tmpl" value="255" />
+          <entry key="txt" value="7" />
           <entry key="yaml" value="9" />
         </counts>
       </usages-collector>
@@ -123,8 +100,8 @@
         <counts>
           <entry key="Dockerfile" value="58" />
           <entry key="Go" value="7681" />
-          <entry key="Makefile" value="1261" />
-          <entry key="PLAIN_TEXT" value="262" />
+          <entry key="Makefile" value="1456" />
+          <entry key="PLAIN_TEXT" value="269" />
           <entry key="PROTO" value="5" />
           <entry key="YAML" value="9" />
         </counts>
@@ -134,26 +111,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="6" selection-end-line="100" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cmd/proxy.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
               <caret line="24" column="1" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cmd/templates.go">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -201,7 +164,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/protogen/docs.go">
           <provider selected="true" editor-type-id="text-editor">
             <state>
@@ -211,13 +174,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/proxy.go">
+        <entry file="file://$PROJECT_DIR$/templates/docgen/docs.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
-              <folding>
-                <element signature="e#17#160#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="15">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/configgen/doc.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Makefile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="372">
+              <caret line="69" column="48" selection-start-line="69" selection-start-column="48" selection-end-line="69" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -307,8 +285,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/project/dockerfile.go" />
-        <option value="$PROJECT_DIR$/project/main.go" />
         <option value="$PROJECT_DIR$/project/root.go" />
         <option value="$PROJECT_DIR$/project/plugins/echo.go" />
         <option value="$PROJECT_DIR$/project/plugins/accounts.go" />
@@ -317,7 +293,6 @@
         <option value="$PROJECT_DIR$/project/plugins/gokit_server.go" />
         <option value="$PROJECT_DIR$/project/user.go" />
         <option value="$PROJECT_DIR$/project/gitignore.go" />
-        <option value="$PROJECT_DIR$/Makefile" />
         <option value="$PROJECT_DIR$/cmd/root.go" />
         <option value="$PROJECT_DIR$/cmd/server.go" />
         <option value="$PROJECT_DIR$/cmd/init.go" />
@@ -358,6 +333,9 @@
         <option value="$PROJECT_DIR$/templates/dbgen/doc.go" />
         <option value="$PROJECT_DIR$/templates/projectgen/doc.go" />
         <option value="$PROJECT_DIR$/templates/protogen/docs.go" />
+        <option value="$PROJECT_DIR$/templates/docgen/docs.go" />
+        <option value="$PROJECT_DIR$/templates/configgen/doc.go" />
+        <option value="$PROJECT_DIR$/Makefile" />
       </list>
     </option>
   </component>
@@ -379,11 +357,6 @@
             <path>
               <item name="grpcgen" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="grpcgen" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -435,7 +408,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="947" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26800978" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -467,14 +439,6 @@
     <proxy>direct</proxy>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/cmd/server.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="27" column="35" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/gokit_server.go" />
     <entry file="file://$PROJECT_DIR$/example/cmd/server.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-857">
@@ -627,13 +591,6 @@
     <entry file="file://$PROJECT_DIR$/templates/gatewaygen/gateway/config.yaml.tmpl">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-23">
-          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/demoservice/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -666,6 +623,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="16" selection-start-column="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/docgen/docs.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/configgen/doc.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="69" column="48" selection-start-line="69" selection-start-column="48" selection-end-line="69" selection-end-column="48" />
         </state>
       </provider>
     </entry>
