@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/grpcgen.iml" filepath="$PROJECT_DIR$/.idea/grpcgen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/grpcgen.iml" filepath="$PROJECT_DIR$/.idea/grpcgen.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/rpcgen.iml" filepath="$PROJECT_DIR$/.idea/rpcgen.iml" />
     </modules>
   </component>

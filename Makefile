@@ -5,6 +5,15 @@ DOCKER_IMAGE ?=	grpcgen
 
 service_name =	$(word 2,$(subst /, ,$1))
 
+.PHONY: example
+example:
+	go install .
+	cd ../grpcgen-example; rm -rf * \
+		&& rm .gitignore \
+		&& grpcgen init \
+		&& make session \
+		&& make user
+
 .PHONY: setup
 setup: ## download dependencies and tls certificates
 	brew install prototool

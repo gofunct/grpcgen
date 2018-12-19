@@ -1,14 +1,14 @@
 package project
 
 import (
+	"flag"
 	"github.com/gofunct/grpcgen/logging"
 	"github.com/gofunct/grpcgen/project/utils"
 	"github.com/spf13/pflag"
 	"path/filepath"
-	"flag"
 )
 
-func CreateProxyCmdFile(p *Project) {
+func (p *Project) CreateProxyCmdFile() {
 	template := `
 import (
 	"encoding/json"
